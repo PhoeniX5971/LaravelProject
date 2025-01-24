@@ -11,21 +11,40 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AuthController extends Controller
 {
     // Sign In
+//    public function signIn(Request $request)
+//    {
+//        $credentials = $request->only('email', 'password');
+//
+//        // Log the incoming credentials to verify
+//        \Log::info('Attempting login with:', $credentials);
+//
+//        if (auth()->attempt($credentials)) {
+//            return response()->json(['success' => true, 'message' => 'Login successful']);
+//        } else {
+//            \Log::info('Authentication failed for email: ' . $request->email);
+//            return response()->json(['success' => false, 'message' => 'Invalid credentials'], 401);
+//        }
+//    }
     public function signIn(Request $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
 
-        if (!$token = Auth::attempt($credentials)) {
-            return response()->json(['success' => false, 'message' => 'Invalid credentials'], 401);
+        // Auth::attempt will automatically hash the provided password and compare it to the stored hash
+        if (!$token = Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials',
+            ], 401);
         }
 
         return response()->json([
             'success' => true,
-            'message' => 'User signed in',
+            'message' => 'User signed in successfully',
+            'data' => Auth::user(),
             'token' => $token,
-            'user' => Auth::user(),
         ]);
     }
+
 
     // Sign Up (if required)
     public function signUp(Request $request): JsonResponse

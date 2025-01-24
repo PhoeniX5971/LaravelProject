@@ -12,7 +12,7 @@ class CreateFullDB extends Migration
             $table->id();
             $table->string('username', 50)->unique();
             $table->string('email', 100)->unique();
-            $table->string('password_hash');
+            $table->string('password');
             $table->string('profile_picture')->nullable();
             $table->text('bio')->nullable();
             $table->timestamps();

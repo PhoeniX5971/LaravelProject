@@ -10,7 +10,7 @@ class Post extends Model
     protected $table = 'posts';
 
     // Allow mass assignment for relevant columns
-    protected $fillable = ['title', 'content', 'user_id', 'username', 'profile_picture', 'bio'];
+    protected $fillable = ['title', 'content', 'attachment' ,'user_id', 'has_attachments', 'content'];
 
     // If timestamps are not used, set this to false
     public $timestamps = true;
@@ -37,12 +37,12 @@ class Post extends Model
      * Custom method to simulate user data access.
      * Retrieves associated user data from the same post record.
      */
-    public function getUserAttribute()
-    {
-        return [
-            'id' => $this->user_id,
-            'username' => $this->username,
-            'profile_picture' => $this->profile_picture,
-        ];
-    }
+//    public function getUserAttribute()
+//    {
+//        return [
+//            'id' => $this->user_id,
+//            'username' => $this->username,
+//            'profile_picture' => $this->profile_picture,
+//        ];
+//    }
 }

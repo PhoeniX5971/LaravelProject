@@ -54,4 +54,26 @@ class PostController extends Controller
         // Implement removing interaction logic
         return response()->json(['success' => true]);
     }
+
+    /**
+     * Display posts by the authenticated user.
+     *
+     * @return JsonResponse
+     */
+//    public function myPosts()
+//    {
+//        // Ensure the user is authenticated
+//        $user = auth()->user(); // Get the currently authenticated user
+//
+//        // Fetch the posts by the authenticated user
+//        $posts = Post::where('user_id', $user->id)->get(); // Assuming each post has a 'user_id' column
+//
+//        // You can return the posts in JSON format or as a view
+//        // For JSON response:
+//        return response()->json([
+//            'success' => true,
+//            'posts' => $posts
+//        ]);
+//
+//    }
 }
